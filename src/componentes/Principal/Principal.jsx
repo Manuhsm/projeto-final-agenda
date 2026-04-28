@@ -1,16 +1,11 @@
-function Principal({ titulo, children }) {
-  const navigate = useNavigate();
+import "./Principal.css";
 
-  return (
-    <main className="principal__root">
-      <div className="principal__titulo">
-
-        <h2>{titulo}</h2>
-      </div>
-
-      {children}
-    </main>
-  );
+function Principal() {
+    return (
+        <div className="principal__titulo">
+            <h2></h2>
+        </div>
+    );
 }
 
 export default Principal;
