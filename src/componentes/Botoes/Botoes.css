@@ -1,0 +1,15 @@
+.botao-customizado__root {
+  padding: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.botao-customizado__primario {
+  background-color: rgb(34, 0, 27);
+  color: rgb(173, 173, 173);
+}
+
+.botao-customizado__secundario {
+  background-color: rgb(34, 0, 27);
+  color: rgb(173, 173, 173);
+}

@@ -1,10 +1,21 @@
 import "./Botoes.css";
 
-function Botoes({ children }) {
+function Botoes({ tipo, aoClicar, children }) {
+  let classes = "botao-customizado__root";
+
+  switch (tipo) {
+    case "primario":
+      classes += " botao-customizado__primario";
+      break;
+    case "secundario":
+      classes += " botao-customizado__secundario";
+      break;
+  }
+
   return (
-    <div className="botoes__root">
+    <button className={classes} onClick={aoClicar}>
       {children}
-    </div>
+    </button>
   );
 }
 

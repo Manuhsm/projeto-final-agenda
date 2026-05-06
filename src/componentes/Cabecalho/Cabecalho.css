@@ -1,12 +1,9 @@
-/* .cabecalho__root {
-  background-color: green;
+.cabecalho__root {
+  background-color: rgb(148, 40, 99);
   font-size: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
-} */
-
-.cabecalho__titulo {
-    font-size: 12px;
+  font-family: 'Arial', sans-serif;
 }

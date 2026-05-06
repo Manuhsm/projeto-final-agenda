@@ -1,0 +1,8 @@
+.principal__root {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: rgba(255, 192, 203, 0.541);
+}
+

@@ -1,13 +1,31 @@
-import Cabecalho from './componentes/Cabecalho/Cabecalho';
-import Principal from './componentes/Principal/Principal';
-import Rodape from './componentes/Rodape/Rodape';
+import Cabecalho from "./componentes/Cabecalho/Cabecalho";
+import Rodape from "./componentes/Rodape/Rodape";
 
-function App () {
+import PaginaInicial from "./paginas/PaginaInicial/PaginaInicial";
+import CadastroCompromissos from "./paginas/CadastroCompromissos/CadastroCompromissos";
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+const roteador = createBrowserRouter([
+  {
+    path: "/",
+    element: <PaginaInicial />
+  },
+  {
+    path: "/cadastro-compromissos",
+    element: <CadastroCompromissos />
+  }
+]);
+
+function App() {
   return (
     <>
-        <Cabecalho />
-        <Principal />
-        <Rodape />
+      <Cabecalho />
+      <RouterProvider router={roteador} />
+      <Rodape />
+      <ToastContainer />
     </>
   );
 }

@@ -5,7 +5,7 @@ function Rodape() {
 
   return (
     <footer className="rodape">
-      Copyright © {anoAtual} - Todos os direitos reservados
+      Anote todos seus compromissos aqui!
     </footer>
   );
 }
