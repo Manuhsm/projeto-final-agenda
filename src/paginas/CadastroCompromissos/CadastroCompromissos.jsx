@@ -2,9 +2,11 @@ import './CadastroCompromissos.css';
 
 import CampoCustomizado from '../../componentes/CampoCustomizado/CampoCustomizado';
 import Principal from '../../componentes/Principal/Principal';
+import Botoes from '../../componentes/Botoes/Botoes';
 
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function CadastroCompromissos() {
     const navigate = useNavigate();
@@ -13,11 +15,45 @@ function CadastroCompromissos() {
         titulo: '',
         data: '',
         hora: '',
-        descricao: ''
+        descricao: '',
     });
 
+    const validarDescricao = (descricao) => {
+        if (descricao.length > 200) {
+            toast.error('A descrição deve conter no máximo 200 caracteres!');
+            return false;
+        }
+        return true;
+    };
 
-    return <Principal>
+    const validarData = (data) => {
+        const dataAtual = new Date();
+        const dataCompromisso = new Date(data);
+
+        if (dataCompromisso < dataAtual) {
+            toast.error('A data do compromisso não pode ser anterior à data atual!');
+            return false;
+        }
+        return true;
+    };
+
+    const adicionar = () => {
+
+        if (!compromisso.titulo || !compromisso.data){
+            toast.error('Preencha os campos obrigatórios!');
+            return;
+        }
+        if(!validarDescricao(compromisso.descricao)){
+            return;
+        }
+
+        if(!validarData(compromisso.data)){
+            return;
+        }
+    };
+
+    return (
+    <Principal>
         <CampoCustomizado
             label="Título"
             type="text"
@@ -34,7 +70,6 @@ function CadastroCompromissos() {
         />
         <CampoCustomizado
             label="Hora"
-            obrigatorio={true}
             type="time"
             value={compromisso.hora}
             onChange={(e) => setCompromisso({ ...compromisso, hora: e.target.value })}
@@ -45,7 +80,13 @@ function CadastroCompromissos() {
             onChange={(e) => setCompromisso({ ...compromisso, descricao: e.target.value })}
         />
 
+        <Botoes tipo="primario" aoClicar={adicionar}>
+            Adicionar
+        </Botoes>
+
     </Principal>
+       
+        );
 }
 
 export default CadastroCompromissos;
