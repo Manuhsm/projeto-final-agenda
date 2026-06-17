@@ -1,0 +1,28 @@
+.lista-compromissos__mensagem-vazia {
+  text-align: center;
+  color: var(--cor-cinza);
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.ver-agenda {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.lista-compromissos__informacoes {
+   display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.lista-compromissos__botao-adicionar {
+  position: fixed;
+  bottom: 64px;
+  right: 24px;
+  cursor: pointer;
+}

@@ -6,3 +6,9 @@
   background-color: rgba(255, 192, 203, 0.541);
 }
 
+.principal__titulo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
