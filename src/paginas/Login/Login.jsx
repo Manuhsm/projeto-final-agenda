@@ -2,7 +2,7 @@ import "./Login.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import BotaoCustomizado from "../../componentes/BotaoCustomizado/BotaoCustomizado";
+import Botoes from "../../componentes/Botoes/Botoes";
 import CampoCustomizado from "../../componentes/CampoCustomizado/CampoCustomizado";
 import Principal from "../../componentes/Principal/Principal";
 
@@ -48,9 +48,9 @@ function Login() {
           onChange={(e) => setLoginForm({ ...loginForm, senha: e.target.value })}
           onKeyPress={(e) => e.code === "Enter" && entrar()}
         />
-        <BotaoCustomizado tipo="primario" aoClicar={entrar}>
+        <Botoes tipo="primario" aoClicar={entrar}>
           Entrar
-        </BotaoCustomizado>
+        </Botoes>
 
         <Link to="/novo-usuario" className="login__link-cadastro">
           Não tem uma conta? Cadastre-se!

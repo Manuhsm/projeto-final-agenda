@@ -1,13 +1,13 @@
 import './CadastroCompromissos.css';
-
 import CampoCustomizado from '../../componentes/CampoCustomizado/CampoCustomizado';
 import Principal from '../../componentes/Principal/Principal';
 import Botoes from '../../componentes/Botoes/Botoes';
-
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState} from "react";
 import { toast } from 'react-toastify';
+import { useAppContext } from '../../contexto/AppContext';
 
+import { buscarCompromissoPeloId, adicionarCompromisso, atualizarCompromisso } from "../../servicos/clientes";
 
 function CadastroCompromissos() {
 
@@ -24,10 +24,8 @@ function CadastroCompromissos() {
     useEffect(() => {
 
       if (params.compromissosId) {
-      const compromissosDoLocalStorage = JSON.parse(localStorage.getItem("compromissos")) || [];
-      const compromissoEncontrado = compromissosDoLocalStorage.find(
-        (compromisso) => compromisso.id === params.compromissosId
-      );
+      const compromissoEncontrado =
+        buscarCompromissoPeloId(params.compromissosId);
 
       if (compromissoEncontrado) {
         setCompromisso(compromissoEncontrado);
@@ -60,57 +58,38 @@ function CadastroCompromissos() {
     };
 
 
+    const { usuarioLogado } = useAppContext();
+
     const adicionar = () => {
+  if (!compromisso.titulo?.trim() || !compromisso.data?.trim()) {
+    toast.error("Título e data são obrigatórios!");
+    return;
+  }
 
-        if (
-            !compromisso.titulo?.trim() ||
-            !compromisso.data?.trim()
-        ) {
-            toast.error("Título e data são obrigatórios!");
-            return;
-        }
+  if (!validarDescricao(compromisso.descricao)) {
+    return;
+  }
 
-        if (!validarDescricao(compromisso.descricao)) {
-            return;
-        }
+  if (!validarData(compromisso.data)) {
+    return;
+  }
 
-        if (!validarData(compromisso.data)) {
-            return;
-        }
+  if (compromisso.id) {
+    atualizarCompromisso(compromisso);
+  } else {
+    adicionarCompromisso(
+      compromisso,
+      usuarioLogado.id
+    );
+  }
 
+  toast.success("Compromisso cadastrado com sucesso!");
+  navigate("/ver-agenda");
+};
 
-        const compromissosDoLocalStorage =
-            JSON.parse(localStorage.getItem("compromissos")) || [];
-
-        if (compromisso.id) {
-
-            const indexDoCompromisso = compromissosDoLocalStorage.findIndex(
-                (itemCompromisso) => itemCompromisso.id === compromisso.id
-            );
-
-            compromissosDoLocalStorage[indexDoCompromisso] = compromisso;
-
-        } else {
-
-            const novoCompromisso = {
-                id: crypto.randomUUID(),
-                ...compromisso
-            };
-
-            compromissosDoLocalStorage.push(novoCompromisso);
-        }
-
-        localStorage.setItem(
-            "compromissos",
-            JSON.stringify(compromissosDoLocalStorage)
-        );
-
-        toast.success("Compromisso cadastrado com sucesso!");
-
-        navigate("/ver-agenda");
-    };
-
-     const titulo = compromisso.id ? "Editar Compromisso" : "Novo Compromisso";
+const titulo = compromisso.id
+  ? "Editar Compromisso"
+  : "Novo Compromisso";
 
     return (
         <Principal titulo={titulo} voltarPara="/ver-agenda">

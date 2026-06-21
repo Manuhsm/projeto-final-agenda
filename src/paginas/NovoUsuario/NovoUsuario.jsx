@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Principal from "../../componentes/Principal";
-import CampoCustomizado from "../../componentes/CampoCustomizado";
-import BotaoCustomizado from "../../componentes/BotaoCustomizado";
+import Principal from "../../componentes/Principal/Principal";
+import CampoCustomizado from "../../componentes/CampoCustomizado/CampoCustomizado";
+import Botoes from "../../componentes/Botoes/Botoes";
 import validarEmail from "../../utils/validarEmail";
 import validarSenha from "../../utils/validarSenha";
 
@@ -83,7 +83,7 @@ function NovoUsuario() {
         onBlur={(e) => {
           if (!validarSenha(e.target.value)) {
             toast.error(
-              "A senha deve conter no mínimo 4 caracteres."
+              "A senha deve conter no mínimo 6 caracteres."
             );
           }
         }}
@@ -98,9 +98,9 @@ function NovoUsuario() {
         obrigatorio
       />
 
-      <BotaoCustomizado tipo="secundario" aoClicar={salvar}>
+      <Botoes tipo="secundario" aoClicar={salvar}>
         Salvar
-      </BotaoCustomizado>
+      </Botoes>
     </Principal>
   );
 }
